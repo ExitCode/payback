@@ -32,7 +32,7 @@
   "screenshots": [],
   "shortcuts": [],
   "short_name": "PAYBACK",
-  "start_url": "/",
+  "start_url": "/payback/index.html",
   "theme_color": "#ffffff",
   "scope": "/",
   "android_package_name": "com.pt-soft.payback.android",
