@@ -34,7 +34,7 @@
   "short_name": "PAYBACK",
   "start_url": "/payback/index.html",
   "theme_color": "#ffffff",
-  "scope": "/",
+  "scope": "/payback/",
   "android_package_name": "com.pt-soft.payback.android",
   "prefer_related_applications": true,
   "related_applications": [],
