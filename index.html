@@ -121,7 +121,7 @@
 
             if (navigator.storage && navigator.storage.persist) {
                 navigator.storage.persist().then((persistResult) => {
-                    alert(`Persisted storage granted: ${persistResult}`);
+                    console.log(`Persisted storage granted: ${persistResult}`);
                 });
             }
         }
