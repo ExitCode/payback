@@ -1,0 +1,126 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="HandheldFriendly" content="true" /> -->
+  
+    <title>Payback</title>
+    <meta name="description" content="Present your Payback Card!">
+    <meta name="author" content="Spawn">
+  
+    <meta property="og:title" content="Payback">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://payback.pt-soft.com/">
+    <meta property="og:description" content="Present your Payback Card!">
+    <meta property="og:image" content="image.png">
+
+    <meta content='yes' name='apple-mobile-web-app-capable'/>
+    <!-- <meta content='yes' name='mobile-web-app-capable'/> -->
+    <meta name="theme-color" content="#ffffff"/>
+
+
+
+    <meta name='viewport' content= 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <meta viewport= 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' mobileAppIOS= true>
+    <meta name="mobile-web-app-capable"  content= "yes">
+    <meta name="full-screen"  content="yes">
+    <meta name="browsermode"  content="application">
+    <meta name="screen-orientation"  content="landscape">
+
+    <meta name="HandheldFriendly" content="true" />
+
+  
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="./manifest.json" crossorigin="use-credentials">
+    <link rel="apple-touch-icon" href="/img/pb_logo-192.png">
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+  
+  <body class="LOAD">
+    <div id="card">
+        <div id="head" class="content">DIESE KARTE IST EIGENTUM VON <b>PAYBACK</b> UND DIENT DER ERFASSUNG IHRER KUNDENNUMMER</div>
+        <div id="magnet-ribbon">&nbsp;</div>
+
+        <svg id="barcode" class="content"></svg>
+
+        <div id="customer-id" class="content">Kundennummer&nbsp;&nbsp;&nbsp;&nbsp;<span id="id" cxontenteditable="true">000 000 0000</span></div>
+
+        
+
+        <div class="contact content">Info unter www.payback.de oder Serviceline 0180/50 55 100<br />
+        (0,14 EUR/Min. aus dem dt, Festnetz, max 0,42 Eur/Min. aus dem Mobilfunknetz)</div>
+
+        <img id="pb-logo" class="content" src="./img/pb_logo--desktop.svg" alt="PAYPAL" />
+
+        <div class="partner content">Offizielle Payback Partner sind zum Beispiel Alice, Apollo-Optik, Aral, Dänisches Bettenlager, Das Depot, dm-drogerie markt, Europcar, Galeria Kaufhof, Linda Apothekengruppe, real,-, Vattenfall, Vodafone D2 und WMF.<br />
+            Payback Online Partner sind unter anderem ADAC, Amazon.de, bol.de, Conrad Electronic, Dell, Deutsche Post AG, Eventim, Mexx, Quelle GmbH, Schwab-Versand, S.Oliver und Yves Rocher.</div>
+
+    </div>
+
+    <script src="./js/JsBarcode.all.min.js"></script>
+
+    <script>
+        screen.orientation.lock('landscape')
+            .catch ( error => { console.log(error); });
+
+        if('serviceWorker' in navigator) {
+            console.log('[Service Worker] Register');
+            navigator.serviceWorker.register('./sw.js');
+        } else {
+            console.log('[Service Worker] Reuse');
+        }
+
+        var cid = document.querySelector('#customer-id #id');
+        var getChecksum = (code) => {
+            var sw = 1;
+            var qSum = 0;
+            code = '308342' + code;
+
+            for (const c of code) {
+                const product = parseInt(c) * (sw++ % 2 + 1);
+                
+                qSum += Math.floor(product / 10);
+                qSum += product % 10;
+            };
+
+            return (10 - (qSum % 10)) % 10;
+        };
+
+        var renderCode = () => {
+            var lCid = (localStorage["cid"] ?? '')
+                .replace(/[^0-9]/gi, '')
+                .substring(0,9);
+
+            if (lCid.length === 9) {
+                JsBarcode("#barcode")
+                    .options({font: "OCR-B"}) // Will affect all barcodes
+                    .EAN13("240" + lCid, {fontSize: 20, textMargin: 0, height: 75})
+                    .render();
+
+                cid.innerText = `${lCid.substring(0,3)} ${lCid.substring(3,6)} ${lCid.substring(6,9)}${getChecksum(lCid)}`;
+            } else { cid.innerText = '[double click]'; }
+
+        };
+        renderCode();
+        
+        var promptId = () => {
+            localStorage["cid"] = prompt("Kundennummer", localStorage["cid"] ?? '') ?? localStorage["cid"];
+            renderCode();
+        };
+
+        cid.addEventListener("dblclick", function() {
+            promptId();
+        }, false);
+
+        window.onload = () => {
+            document.querySelector('#card').style.height = window.innerHeight + 'px';
+            document.body.className = '';
+            //alert('x 26 ' + window.innerHeight);
+        }
+        
+    </script>
+
+  </body>
+  </html>

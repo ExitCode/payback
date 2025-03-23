@@ -1,0 +1,61 @@
+html, body {
+    font-family: "Open Sans",Arial,sans-serif;
+    font-size: 0.9rem;    
+    margin: 0;
+    background-color: #000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow: hidden;
+    -webkit-touch-callout: none;
+    height: 100%;
+}
+
+body.LOAD * {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+#card {
+    background-color: #fff;
+    border-radius: 1em;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.content {
+    margin: 0 2rem;
+    padding: 0.3rem 0;
+}
+
+#magnet-ribbon {
+    background-color: #333333;
+    height: 5.0rem;
+}
+
+#customer-id {
+    float: right;
+    margin-top: 5rem;
+}
+
+#customer-id #id {
+    font-weight: bold;
+    font-size: 200%;
+}
+
+#pb-logo {
+    float: right;
+    height: 4rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 0;
+}
+
+.partner {
+    font-weight: bold;
+    width: 60%;
+}

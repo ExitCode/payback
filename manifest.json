@@ -1,0 +1,45 @@
+{
+  "background_color": "#ffffff",
+  "categories": ["docs", "wallet"],
+  "description": "Present your PAYBACK Card!",
+  "display": "standalone",
+  "orientation": "landscape",
+  "gcm_sender_id": "49625052041",
+  "gcm_user_visible_only": true,
+  "icons": [
+    {
+      "src": "/payback/img/pb_logo--fav.svg",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/payback/img/pb_logo--fav.svg",
+      "sizes": "any",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/payback/img/pb_logo-192.png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/payback/img/pb_logo-512.png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ],
+  "name": "PAYBACK",
+  "screenshots": [],
+  "shortcuts": [],
+  "short_name": "PAYBACK",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "scope": "/",
+  "android_package_name": "com.pt-soft.payback.android",
+  "prefer_related_applications": true,
+  "related_applications": [],
+  "launch_handler": {
+    "route_to": "existing-client",
+    "navigate_existing_client": "never"
+  }
+}
