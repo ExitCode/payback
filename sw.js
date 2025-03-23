@@ -1,5 +1,15 @@
 const cacheName = 'payback-pt-soft.com-v28';
-  const contentToCache = [];
+  const contentToCache = [
+    "/payback/favicon.ico",
+    "/payback/index.html",
+    "/payback/manifest.json",
+    "/payback/css/main.css",
+    "/payback/img/pb_logo--desktop.svg",
+    "/payback/img/pb_logo--fav.svg",
+    "/payback/img/pb_logo-192.png",
+    "/payback/img/pb_logo-512.png",
+    "/payback/js/JsBarcode.all.min.js"
+  ];
 
 self.addEventListener('install', (e) => {
     console.log('[Service Worker] Install');
